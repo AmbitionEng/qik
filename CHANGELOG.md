@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.2.1 (2024-10-26)
+
+#### Feature
+
+- Support earlier versions of git where `--format` was not an option of `git ls-files`.
+
 ## 0.2.0 (2024-10-13)
 
 #### API Break
