@@ -50,10 +50,10 @@ def globs(*vals: run_deps.Glob | str) -> str:
         # that we sort globs for a consistent hash
         pattern_str = " ".join(repo_patterns)
         git_ls_lines = qik.shell.exec(f"git ls-files -cms {pattern_str}", check=True, lines=True)
-        git_ls_lines_split = list(
+        git_ls_lines_split = [
             (path, sha)
             for _, sha, _, path in (re.split(r"\s+", line, maxsplit=3) for line in git_ls_lines)
-        )
+        ]
         hashes = dict(git_ls_lines_split)
 
         # Files that are modified appear twice. Manually compute their hashes
