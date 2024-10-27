@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import collections
+import re
 import subprocess
 from typing import TYPE_CHECKING
 
@@ -45,14 +46,14 @@ def globs(*vals: run_deps.Glob | str) -> str:
     )
     repo_hash = ""
     if repo_patterns:
-        fmt = "--format '%(path)\t%(objectname)'"
         # Create a pattern string for git ls-files. Ensure there are no duplicates and
         # that we sort globs for a consistent hash
         pattern_str = " ".join(repo_patterns)
-        git_ls_lines = qik.shell.exec(
-            f"git ls-files -cm {fmt} {pattern_str}", check=True, lines=True
-        )
-        git_ls_lines_split = [line.split("\t", 1) for line in git_ls_lines]
+        git_ls_lines = qik.shell.exec(f"git ls-files -cms {pattern_str}", check=True, lines=True)
+        git_ls_lines_split = [
+            (path, sha)
+            for _, sha, _, path in (re.split(r"\s+", line, maxsplit=3) for line in git_ls_lines)
+        ]
         hashes = dict(git_ls_lines_split)
 
         # Files that are modified appear twice. Manually compute their hashes
@@ -61,7 +62,7 @@ def globs(*vals: run_deps.Glob | str) -> str:
         if modified:
             try:
                 modified_hashes_lines = qik.shell.exec(
-                    f"git ls-files --format '%(path)' {pattern_str} -m | xargs git hash-object",
+                    f"git ls-files {pattern_str} -m | xargs git hash-object",
                     check=True,
                     lines=True,
                 )
@@ -70,7 +71,7 @@ def globs(*vals: run_deps.Glob | str) -> str:
                 # not exist. Do the suboptimal strategy here, piping individual files to
                 # `git hash-object` while printing zeroes for files that no longer exist.
                 cmd = f"""
-                    git ls-files --format '%(path)' {pattern_str} -m | while IFS= read -r file; do
+                    git ls-files {pattern_str} -m | while IFS= read -r file; do
                         if [ -f "$file" ]; then
                             git hash-object "$file"
                         else

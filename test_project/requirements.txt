@@ -73,11 +73,11 @@ platformdirs==4.3.6
     # via
     #   poetry
     #   virtualenv
-poetry==1.8.3
+poetry==1.8.4
     # via
     #   -r requirements.in
     #   poetry-plugin-export
-poetry-core==1.9.0
+poetry-core==1.9.1
     # via
     #   poetry
     #   poetry-plugin-export
@@ -92,7 +92,7 @@ pyproject-hooks==1.2.0
     #   build
     #   pip-tools
     #   poetry
-rapidfuzz==3.10.0
+rapidfuzz==3.10.1
     # via cleo
 requests==2.32.3
     # via
@@ -107,13 +107,13 @@ sqlparse==0.5.1
     # via django
 tomlkit==0.13.2
     # via poetry
-trove-classifiers==2024.10.13
+trove-classifiers==2024.10.21.16
     # via poetry
 urllib3==2.2.3
     # via
     #   dulwich
     #   requests
-virtualenv==20.26.6
+virtualenv==20.27.0
     # via poetry
 wheel==0.44.0
     # via pip-tools
