@@ -17,10 +17,6 @@
     font-family: "Gunplay";
     color: #BD4D86;
 }
-.md-typeset__table {
-  min-width: 100%;
-}
-
 .md-typeset table:not([class]) {
   display: table;
 }
