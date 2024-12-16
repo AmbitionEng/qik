@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.2.2 (2024-12-15)
+
+#### Changes
+
+  - Drop support for Python 3.9, changed project ownership to `AmbitionEng` by [@wesleykendall](https://github.com/wesleykendall) in [#14](https://github.com/AmbitionEng/qik/pull/14).
+
 ## 0.2.1 (2024-10-26)
 
 #### Feature
