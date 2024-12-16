@@ -1,7 +1,7 @@
 _extensions:
 - jinja2_time.TimeExtension
 _template: git@github.com:Opus10/python-library-template.git
-_version: 2794ea47b0220081dc869d01199ee490dda00762
+_version: b7d2321846eeeb120ea9455597ddcf9bd8b5e7a4
 check_types_in_ci: 'False'
 is_django: 'False'
 module_name: qik

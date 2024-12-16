@@ -2,8 +2,8 @@ site_name: Qik
 site_description: A cached command runner for Python monorepos.
 docs_dir: docs
 
-repo_name: Opus10/qik
-repo_url: https://github.com/Opus10/qik
+repo_name: AmbitionEng/qik
+repo_url: https://github.com/AmbitionEng/qik
 
 plugins:
   - search
@@ -48,6 +48,13 @@ markdown_extensions:
   - pymdownx.emoji:
       emoji_index: !!python/name:material.extensions.emoji.twemoji
       emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - toc:
+      permalink: true
 
 theme:
   custom_dir: docs/overrides
@@ -55,6 +62,7 @@ theme:
   logo: static/logo.png
   favicon: static/logo.png
   features:
+    - content.code.copy
     - navigation.footer
     - navigation.path
     - navigation.sections

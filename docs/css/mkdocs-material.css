@@ -18,7 +18,7 @@
     color: #BD4D86;
 }
 .md-typeset table:not([class]) {
-    display: table;
+  display: table;
 }
 
 .md-footer {
