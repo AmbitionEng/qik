@@ -1,8 +1,8 @@
 site_name: qik
 docs_dir: docs
 
-repo_name: Opus10/qik
-repo_url: https://github.com/Opus10/qik
+repo_name: AmbitionEng/qik
+repo_url: https://github.com/AmbitionEng/qik
 
 plugins:
   - search
@@ -46,12 +46,15 @@ markdown_extensions:
         - name: mermaid
           class: mermaid
           format: !!python/name:pymdownx.superfences.fence_code_format
+  - toc:
+      permalink: true
 
 theme:
   name: material
-  logo: static/logo.png
-  favicon: static/logo.png
+  logo: static/dark_logo.png
+  favicon: static/light_logo.png
   features:
+    - content.code.copy
     - navigation.footer
     - navigation.path
     - navigation.sections
