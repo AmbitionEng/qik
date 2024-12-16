@@ -1,5 +1,5 @@
 [build-system]
-requires = ["poetry_core>=1.0.0"]
+requires = ["poetry_core>=1.9.0"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.coverage.run]
@@ -37,12 +37,13 @@ classifiers = [
   "Programming Language :: Python :: 3.10",
   "Programming Language :: Python :: 3.11",
   "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
   "Programming Language :: Python :: 3 :: Only",
 ]
 license = "BSD-3-Clause"
 readme = "README.md"
-homepage = "https://github.com/Opus10/qik"
-repository = "https://github.com/Opus10/qik"
+homepage = "https://github.com/AmbitionEng/qik"
+repository = "https://github.com/AmbitionEng/qik"
 documentation = "https://qik.readthedocs.io"
 
 [tool.poetry.scripts]
@@ -51,7 +52,7 @@ qikx = "qik.cli:qikx_entry"
 
 [tool.poetry.dependencies]
 python = ">=3.10.0,<4"
-msgspec = ">=0.18.6"
+msgspec-python313-pre = ">=0.18.6"
 xxhash = ">=3.4.1"
 typing-extensions = ">=4.11.0"
 rich = { version = ">=13" }
@@ -69,22 +70,25 @@ dev = ["watchdog", "grimp", "rustworkx", "uv"]
 s3 = ["boto3"]
 
 [tool.poetry.dev-dependencies]
-pytest = "8.3.2"
+pytest = "8.3.3"
 pytest-cov = "5.0.0"
 pytest-dotenv = "0.5.2"
 pytest-mock = "3.14.0"
 moto = {extras = ["s3", "server"], version = "5.0.12"}
-tox = "4.18.0"
-ruff = "0.6.2"
-pyright = "1.1.377"
-mkdocs = "1.6.0"
-black = "24.8.0"
-mkdocs-material = "9.5.33"
-mkdocstrings-python = "1.10.8"
+tox = "4.23.2"
+ruff = "0.7.1"
 pymdown-extensions = "10.11.1"
+pyright = "1.1.386"
+mkdocs = "1.6.1"
+black = "24.10.0"
+mkdocs-material = "9.5.42"
+mkdocstrings-python = "1.12.2"
 footing = "*"
 setuptools = "*"
-poetry-core = "*"
+poetry-core = "1.9.1"
+cleo = "2.1.0"
+poetry-plugin-export = "1.8.0"
+typing-extensions = "4.12.2"
 
 [tool.pytest.ini_options]
 xfail_strict = true
