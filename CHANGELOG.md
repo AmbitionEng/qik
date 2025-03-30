@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.2.3 (2025-03-13)
+
+#### Changes
+
+  - Use the latest msgspec release for full Python 3.13 support by [@wesleykendall](https://github.com/wesleykendall) in [#16](https://github.com/AmbitionEng/qik/pull/16).
+
 ## 0.2.2 (2024-12-15)
 
 #### Changes
