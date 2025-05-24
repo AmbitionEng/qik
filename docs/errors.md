@@ -1,6 +1,6 @@
 # Troubleshooting
 
-All errors from the qik CLI. If you encountered an unexpected error, open an issue [here](https://github.com/Opus10/qik/issues).
+All errors from the qik CLI. If you encountered an unexpected error, open an issue [here](https://github.com/AmbitionEng/qik/issues).
 
 ## General Configuration
 

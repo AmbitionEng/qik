@@ -231,6 +231,22 @@ Context variables can be supplied in the environment:
 BUNDLE_CACHE=remote qik build-bundle
 ```
 
+### Tags
+
+Use tags to group together common commands:
+
+```toml
+[command.frontend-lint]
+exec = "npm run biome"
+tags = ["lint"]
+
+[command.backend-lint]
+exec = "ruff check --fix"
+tags = ["lint"]
+```
+
+Running `qik -t lint` will run all commands tagged with `lint`.
+
 ### Command Line Interface
 
 The core `qik` CLI functionality is as follows:
@@ -239,6 +255,7 @@ The core `qik` CLI functionality is as follows:
 - `qik <cmd_name> <cmd_name>` to select commands by name.
 - `-m` to select by module.
 - `-s` to select by space.
+- `-t` to select by tag.
 - `--watch` to reactively run selected commands.
 - `--since` to select commands based on changes since a git reference.
 - `-f` to run without the cache.
@@ -285,7 +302,7 @@ Finish by checking out:
 - [Roadmap](roadmap.md) for all the exciting upcoming features.
 - [Blog](blog/index.md) for updates, how-tos, and other articles.
 
-Questions or thoughts? Open a [discussion](https://github.com/Opus10/qik/discussions). Report bugs [here](https://github.com/Opus10/qik/issues).
+Questions or thoughts? Open a [discussion](https://github.com/AmbitionEng/qik/discussions). Report bugs [here](https://github.com/AmbitionEng/qik/issues).
 
 ## Disclaimer
 

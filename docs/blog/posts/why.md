@@ -151,7 +151,7 @@ I am very bullish on Python's future, especially with the [Rust](https://www.rus
 
 Qik is very much in its infancy. Here's how you can get involved:
 
-- [Star or follow the project on Github](https://github.com/Opus10/qik) to see updates.
-- [Open a discussion](https://github.com/Opus10/qik/discussions) if you have any ideas for improvement.
-- [Open an issue](https://github.com/Opus10/qik/issues) if you're using it and are having trouble.
+- [Star or follow the project on Github](https://github.com/AmbitionEng/qik) to see updates.
+- [Open a discussion](https://github.com/AmbitionEng/qik/discussions) if you have any ideas for improvement.
+- [Open an issue](https://github.com/AmbitionEng/qik/issues) if you're using it and are having trouble.
 - [Contact me privately](mailto:wesleykendall@gmail.com) for anything else.

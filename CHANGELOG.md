@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.2.4 (2025-05-24)
+
+#### Feature
+
+  - Support tagging commands and running them with `qik -t <tag>` by [@wesleykendall](https://github.com/wesleykendall) in [#18](https://github.com/AmbitionEng/qik/pull/18).
+
 ## 0.2.3 (2025-03-13)
 
 #### Changes

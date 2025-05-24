@@ -28,6 +28,20 @@ Running `qik lock` will cache results of this command in your git repo. The cach
 
     Dependency files must be indexed in your git repo to break the cache. See the [caching guide](caching.md) for an in-depth overview of how caching works. Similarly, see the [CI/CD cookbook](cookbook_cicd.md) for patterns on using caching in continuous integration.
 
+To tag commands, use `tags`:
+
+```toml
+[commands.lock-prod]
+exec = "pip-compile > requirements.txt"
+tags = ["lock"]
+
+[commands.lock-dev]
+exec = "pip-compile requirements-dev.in > requirements-dev.txt"
+tags = ["lock"]
+```
+
+Running `qik -t lock` will run both `lock-prod` and `lock-dev`.
+
 ## Dependencies
 
 Qik command caching is centered around a rich set of dependencies. Here we'll cover dependencies provided by the core runner and overview some offered by plugins.
