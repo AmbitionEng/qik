@@ -111,6 +111,17 @@ def test_ls():
 
 def test_selectors():
     """Test various cache / git selectors."""
+    # Test --tag
+    assert set(shell("qik --tag linting --ls").stdout.split("\n")) == {
+        "",
+        "modular_format@default#a",
+        "modular_format@default#b_module",
+        "modular_format@other#nest/c",
+        "modular_lint@default#a",
+        "modular_lint@default#b_module",
+        "modular_lint@other#nest/c",
+    }
+
     # Ensure repo cache is warm
     assert shell("qik --cache-status cold --cache repo --ls --fail").returncode == 0
 

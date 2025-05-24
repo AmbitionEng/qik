@@ -85,6 +85,13 @@ def qik_entry() -> None:
         choices=["warm", "cold"],
     )
     parser.add_argument(
+        "-t",
+        "--tag",
+        help="Select by tag(s).",
+        action="append",
+        dest="tags",
+    )
+    parser.add_argument(
         "-v",
         "--verbosity",
         nargs="?",
@@ -117,6 +124,7 @@ def qik_entry() -> None:
         modules=args.modules or qik.unset.UNSET,
         spaces=spaces or qik.unset.UNSET,
         caches=args.caches or qik.unset.UNSET,
+        tags=args.tags or qik.unset.UNSET,
     ):
         res = qik.runner.exec()
         qik_ctx = qik.ctx.by_namespace("qik")

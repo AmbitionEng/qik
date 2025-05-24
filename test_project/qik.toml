@@ -49,11 +49,13 @@ cache-when = "finished"
 exec = "ruff format {module.dir}"
 deps = ["{module.dir}/**.py", {type = "command", name = "modular_lint"}]
 cache = "repo"
+tags = ["linting"]
 
 [commands.modular_lint]
 exec = "ruff check {module.dir}"
 deps = [{type = "pygraph", pyimport = "{module.pyimport}"}]
 cache = "repo"
+tags = ["linting"]
 
 [commands.pghistory_version]
 exec = "pip freeze | grep django-pgtrigger && python --version"

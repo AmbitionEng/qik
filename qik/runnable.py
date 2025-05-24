@@ -150,6 +150,7 @@ def _make_runnable(
             *qik.dep.base(),
             *(qik.dep.factory(dep, module=module, space=space) for dep in conf.deps),
         ],
+        tags=conf.tags,
         module=module.name if module else None,
         artifacts=[qik.ctx.format(artifact) for artifact in conf.artifacts],
         cache=qik.ctx.format(
@@ -212,6 +213,7 @@ class Runnable(msgspec.Struct, frozen=True, dict=True):
     cache: str
     cache_when: qik.conf.CacheWhen
     shell: bool = True
+    tags: list[str] = []
     deps: list[qik.dep.Dep] = []
     artifacts: list[str] = []
     module: str | None = None

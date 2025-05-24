@@ -116,6 +116,7 @@ class Cmd(Base, frozen=True):
     factory: str = ""
     hidden: bool = False
     space: str | qik.unset.UnsetType = qik.unset.UNSET
+    tags: list[str] = []
 
 
 class Var(Base, frozen=True):
@@ -391,9 +392,7 @@ def _parse_project_config(contents: bytes, plugins_conf: Plugins) -> Project:
         "DynamicCmd", [("deps", list[DynamicDeps], [])], bases=(Cmd,), frozen=True
     )
 
-    existing_plugin_confs = {
-        pyimport: PluginLocator for pyimport in plugins_conf.plugins_by_pyimport
-    }
+    existing_plugin_confs = dict.fromkeys(plugins_conf.plugins_by_pyimport, PluginLocator)
     DynamicPlugins = msgspec.defstruct(
         "DynamicPlugins",
         [

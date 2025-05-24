@@ -243,6 +243,14 @@ class Graph:
 
         return self.filter_changes(changes, strategy="since")
 
+    def filter_tags(self, tags: list[str]) -> Self:
+        """Filter the graph by tags."""
+        tags_set = frozenset(tags)
+        return self.filter(
+            (runnable for runnable in self if set(runnable.tags) & tags_set),
+            neighbors=False,
+        )
+
     def filter_changes(
         self, deps: Iterable[qik.dep.Dep], strategy: qik.runnable.FilterStrategy
     ) -> Self:
@@ -361,6 +369,9 @@ def _get_graph() -> Graph:
 
     if qik_ctx.since:
         graph = graph.filter_since(qik_ctx.since)
+
+    if qik_ctx.tags:
+        graph = graph.filter_tags(qik_ctx.tags)
 
     return graph
 
