@@ -194,6 +194,10 @@ When running serially (i.e. `-n 1`) or invoking a single runnable, qik displays 
 
 Parallel runs show progress bars for all commands followed by error output. Show no output with `-v 0` or full output with `-v 2`.
 
+!!! tip
+
+    Manually specify the stdout or progress loggers with `qik -l stdout` or `qik -l progress`.
+
 In all circumstances, the output of the most recent run is always available in the `._qik/out` directory. Tail the files from this directory to see progress on long-running commands.
 
 !!! note

@@ -324,11 +324,16 @@ class Runner:
             max_workers=qik.ctx.by_namespace("qik").workers
         )
         qik_ctx = qik.ctx.by_namespace("qik")
-        self.logger = (
-            qik.logger.Stdout()
-            if len(graph) == 1 or qik_ctx.workers == 1
-            else qik.logger.Progress()
-        )
+        if not qik_ctx.logger:
+            self.logger = (
+                qik.logger.Stdout()
+                if len(graph) == 1 or qik_ctx.workers == 1
+                else qik.logger.Progress()
+            )
+        elif qik_ctx.logger == "progress":
+            self.logger = qik.logger.Progress()
+        else:
+            self.logger = qik.logger.Stdout()
 
     def exec(self, *, changes: Iterable[qik.dep.Dep] | None = None) -> int:
         """Exec the runner, optionally providing a list of changed dependencies."""

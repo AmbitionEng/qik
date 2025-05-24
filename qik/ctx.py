@@ -6,7 +6,7 @@ import contextlib
 import contextvars
 import os
 import threading
-from typing import TYPE_CHECKING, Any, Iterator, TypeVar, overload
+from typing import TYPE_CHECKING, Any, Iterator, Literal, TypeVar, overload
 
 import msgspec
 
@@ -114,6 +114,7 @@ class QikCtx(msgspec.Struct, forbid_unknown_fields=True, rename="kebab", dict=Tr
     cache_status: qik.conf.CacheStatus | None = None
     caches: list[str] = []
     tags: list[str] = []
+    logger: Literal["progress", "stdout"] | None = None
 
     @qik_func.cached_property
     def arch(self) -> qik.arch.ArchType:

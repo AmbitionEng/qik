@@ -44,6 +44,13 @@ def qik_entry() -> None:
         dest="spaces",
     )
     parser.add_argument(
+        "-t",
+        "--tag",
+        help="Select by tag(s).",
+        action="append",
+        dest="tags",
+    )
+    parser.add_argument(
         "--watch", action="store_true", help="Watch for changes.", default=qik.unset.UNSET
     )
     parser.add_argument(
@@ -63,7 +70,11 @@ def qik_entry() -> None:
         default=qik.unset.UNSET,
     )
     parser.add_argument(
-        "--ls", action="store_true", help="List selected commands.", default=qik.unset.UNSET
+        "--ls",
+        dest="ls",
+        action="store_true",
+        help="List selected commands.",
+        default=qik.unset.UNSET,
     )
     parser.add_argument(
         "--fail",
@@ -85,11 +96,11 @@ def qik_entry() -> None:
         choices=["warm", "cold"],
     )
     parser.add_argument(
-        "-t",
-        "--tag",
-        help="Select by tag(s).",
-        action="append",
-        dest="tags",
+        "-l",
+        "--logger",
+        help="Set the logger.",
+        default=qik.unset.UNSET,
+        choices=["progress", "stdout"],
     )
     parser.add_argument(
         "-v",
@@ -125,6 +136,7 @@ def qik_entry() -> None:
         spaces=spaces or qik.unset.UNSET,
         caches=args.caches or qik.unset.UNSET,
         tags=args.tags or qik.unset.UNSET,
+        logger=args.logger,
     ):
         res = qik.runner.exec()
         qik_ctx = qik.ctx.by_namespace("qik")
