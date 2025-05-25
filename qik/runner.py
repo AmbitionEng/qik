@@ -243,6 +243,14 @@ class Graph:
 
         return self.filter_changes(changes, strategy="since")
 
+    def filter_tags(self, tags: list[str]) -> Self:
+        """Filter the graph by tags."""
+        tags_set = frozenset(tags)
+        return self.filter(
+            (runnable for runnable in self if set(runnable.tags) & tags_set),
+            neighbors=False,
+        )
+
     def filter_changes(
         self, deps: Iterable[qik.dep.Dep], strategy: qik.runnable.FilterStrategy
     ) -> Self:
@@ -316,11 +324,16 @@ class Runner:
             max_workers=qik.ctx.by_namespace("qik").workers
         )
         qik_ctx = qik.ctx.by_namespace("qik")
-        self.logger = (
-            qik.logger.Stdout()
-            if len(graph) == 1 or qik_ctx.workers == 1
-            else qik.logger.Progress()
-        )
+        if not qik_ctx.logger:
+            self.logger = (
+                qik.logger.Stdout()
+                if len(graph) == 1 or qik_ctx.workers == 1
+                else qik.logger.Progress()
+            )
+        elif qik_ctx.logger == "progress":
+            self.logger = qik.logger.Progress()
+        else:
+            self.logger = qik.logger.Stdout()
 
     def exec(self, *, changes: Iterable[qik.dep.Dep] | None = None) -> int:
         """Exec the runner, optionally providing a list of changed dependencies."""
@@ -361,6 +374,9 @@ def _get_graph() -> Graph:
 
     if qik_ctx.since:
         graph = graph.filter_since(qik_ctx.since)
+
+    if qik_ctx.tags:
+        graph = graph.filter_tags(qik_ctx.tags)
 
     return graph
 

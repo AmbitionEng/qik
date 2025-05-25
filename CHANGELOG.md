@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.2.4 (2025-05-24)
+
+#### Feature
+
+  - Support tagging commands and running them with `qik -t <tag>` by [@wesleykendall](https://github.com/wesleykendall) in [#17](https://github.com/AmbitionEng/qik/pull/17).
+  - Allow setting the output logger as a command line argument with `qik -l <logger>` by [@wesleykendall](https://github.com/wesleykendall) in [#17](https://github.com/AmbitionEng/qik/pull/17).
+
 ## 0.2.3 (2025-03-13)
 
 #### Changes

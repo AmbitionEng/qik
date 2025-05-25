@@ -6,7 +6,7 @@ We briefly overview how to make a plugin here and how some existing plugins inte
 
 !!! warning
 
-    The plugin system is very much in beta, and the examples below are not thorough. Open a [discussion](https://github.com/Opus10/qik/discussions) if you'd like a head start in creating a qik plugin.
+    The plugin system is very much in beta, and the examples below are not thorough. Open a [discussion](https://github.com/AmbitionEng/qik/discussions) if you'd like a head start in creating a qik plugin.
 
 ## How it Works
 

@@ -28,6 +28,20 @@ Running `qik lock` will cache results of this command in your git repo. The cach
 
     Dependency files must be indexed in your git repo to break the cache. See the [caching guide](caching.md) for an in-depth overview of how caching works. Similarly, see the [CI/CD cookbook](cookbook_cicd.md) for patterns on using caching in continuous integration.
 
+To tag commands, use `tags`:
+
+```toml
+[commands.lock-prod]
+exec = "pip-compile > requirements.txt"
+tags = ["lock"]
+
+[commands.lock-dev]
+exec = "pip-compile requirements-dev.in > requirements-dev.txt"
+tags = ["lock"]
+```
+
+Running `qik -t lock` will run both `lock-prod` and `lock-dev`.
+
 ## Dependencies
 
 Qik command caching is centered around a rich set of dependencies. Here we'll cover dependencies provided by the core runner and overview some offered by plugins.
@@ -179,6 +193,10 @@ By default, commands are executed across all threads. Use `-n` to adjust the num
 When running serially (i.e. `-n 1`) or invoking a single runnable, qik displays all output. The :fast_forward: emoji indicates a cached run while :construction: indicates uncached.
 
 Parallel runs show progress bars for all commands followed by error output. Show no output with `-v 0` or full output with `-v 2`.
+
+!!! tip
+
+    Manually specify the stdout or progress loggers with `qik -l stdout` or `qik -l progress`.
 
 In all circumstances, the output of the most recent run is always available in the `._qik/out` directory. Tail the files from this directory to see progress on long-running commands.
 

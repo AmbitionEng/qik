@@ -97,4 +97,4 @@ There are several tools at your disposal to optimize your CI/CD experience. By l
 
 We recommend running `qik --cache repo --watch` locally to always keep the repo cache up to date.
 
-Qik is still in beta. Open a [discussion](https://github.com/Opus10/qik/discussions) if you have other ideas or suggestions on how to improve the local development and CI/CD experience.
+Qik is still in beta. Open a [discussion](https://github.com/AmbitionEng/qik/discussions) if you have other ideas or suggestions on how to improve the local development and CI/CD experience.

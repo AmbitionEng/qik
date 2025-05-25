@@ -5,7 +5,7 @@ hide:
 
 # Roadmap
 
-Qik has several large upcoming features. If you'd like to suggest other future direction or let us know what you think, [open a discussion here](https://github.com/Opus10/qik/discussions). If you'd like to contribute any of these core changes, [contact Wes first](mailto:wesleykendall@gmail.com).
+Qik has several large upcoming features. If you'd like to suggest other future direction or let us know what you think, [open a discussion here](https://github.com/AmbitionEng/qik/discussions). If you'd like to contribute any of these core changes, [contact Wes first](mailto:wesleykendall@gmail.com).
 
 ## Better Import Graph Control
 
@@ -61,7 +61,7 @@ With this construct, we hope to:
 - Enable import linting commands to keep areas of your monorepo isolated.
 - Enable other types of plugins, such as ones that generate Dockerfiles from your space.
 
-#### Tags
+#### Tags &nbsp; :white_check_mark:<code>v0.2.4</code>
 
 Users will be able to tag their commands, making it easier to select and filter them.
 
@@ -113,4 +113,4 @@ We'd like to support JavaScript import dependencies. Qik's graph plugin serializ
 
 ## Suggestions?
 
-[Open a discussion here](https://github.com/Opus10/qik/discussions) if you have any thoughts or ideas about qik's roadmap.
+[Open a discussion here](https://github.com/AmbitionEng/qik/discussions) if you have any thoughts or ideas about qik's roadmap.

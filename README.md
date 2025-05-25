@@ -287,7 +287,7 @@ Finish by checking out:
 - [Roadmap](https://qik.build/en/stable/roadmap/) for all the exciting upcoming features.
 - [Blog](https://qik.build/en/stable/blog/index/) for updates, how-tos, and other articles.
 
-Questions or thoughts? Open a [discussion](https://github.com/Opus10/qik/discussions). Report bugs [here](https://github.com/Opus10/qik/issues).
+Questions or thoughts? Open a [discussion](https://github.com/AmbitionEng/qik/discussions). Report bugs [here](https://github.com/AmbitionEng/qik/issues).
 
 ## Disclaimer
 
