@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.2.5 (2025-05-30)
+
+#### Fixes
+
+  - Fix an issue where filtering by tags and cache status causes qik to check the cache status of every command by [@wesleykendall](https://github.com/wesleykendall) in [#18](https://github.com/AmbitionEng/qik/pull/18).
+
 ## 0.2.4 (2025-05-24)
 
 #### Feature
