@@ -366,6 +366,9 @@ def _get_graph() -> Graph:
     except RecursionError as exc:
         raise qik.errors.GraphCycle("Cycle detected in DAG.") from exc
 
+    if qik_ctx.tags:
+        graph = graph.filter_tags(qik_ctx.tags)
+
     if qik_ctx.caches:
         graph = graph.filter_caches(qik_ctx.caches)
 
@@ -374,9 +377,6 @@ def _get_graph() -> Graph:
 
     if qik_ctx.since:
         graph = graph.filter_since(qik_ctx.since)
-
-    if qik_ctx.tags:
-        graph = graph.filter_tags(qik_ctx.tags)
 
     return graph
 
