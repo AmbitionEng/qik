@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.2.6 (2025-09-18)
+
+#### Fixes
+
+  - Fix documentation issues surrounding missing python distributions and unmapped modules by [@wesleykendall](https://github.com/wesleykendall) in [#19](https://github.com/AmbitionEng/qik/pull/19).
+
 ## 0.2.5 (2025-05-30)
 
 #### Fixes
