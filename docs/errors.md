@@ -219,48 +219,42 @@ lock-file = "requirements.txt"
 
 `Venv named "{name}" not configured in qik.venvs` means the referenced virtual environment is not found in the project configuration. Ensure you have a `[venvs.{name}]` section for any non-default virtual environment.
 
-## Graph
+## Distributions
 
-<a id="graph0"></a>
+<a id="pydist0"></a>
 
-#### No Module Distribution
+#### No Distribution For Module
 
-`No distribution found for module "{top-level import}"` means the `qik.pygraph` plugin found an external module that could not be mapped to its PyPI distribution. This can happen when the distribution is not installed in the virtual environment (e.g. optional dependencies) or when issues with Python's `importlib.metadata` arise.
+`No distribution found for module "{top-level import}"` means an external module could not be mapped to its PyPI distribution. This can happen when the distribution is not installed in the virtual environment (e.g. optional dependencies) or when issues with Python's `importlib.metadata` arise.
 
 For example, say that `import my_package.submodule` triggers this. You have three options for resolution:
 
 1. Map the top-level module to its distribution:
 
     ```toml
-    [graph.module-pydists]
+    [pydist.modules]
     my_package = "pypi_distribution"
     ```
 
     !!! note
 
-        If the distribution is not installed in your virtual environment, you'll also need to configure the distribution version using [this troubleshooting tip](#dep0).
+        If the distribution is not installed in your virtual environment, you'll also need to configure the distribution version using [this troubleshooting tip](#pydist0).
 
 2. Ignore the specific module:
 
     ```toml
-    [graph.module-pydists]
+    [pydist.modules]
     my_package = ""
     ```
 
 3. Ignore all modules that cannot be mapped:
 
     ```toml
-    [graph]
-    ignore-missing-module-pydists = true
+    [pydist]
+    ignore-missing-modules = true
     ```
 
-!!! tip
-
-    You can also ignore tracking distributions entirely in the graph with `pygraph.ignore_pydists = true`.
-
-## Dependencies
-
-<a id="dep0"></a>
+<a id="pydist1"></a>
 
 #### Distribution Not Found
 
@@ -269,17 +263,20 @@ For example, say that `import my_package.submodule` triggers this. You have thre
 1. Map the distribution to a version:
 
     ```toml
-    [pydist-versions]
+    [pydist.versions]
     pypi-package-name = "version"
     ```
 
 2. Ignore any missing distributions:
 
     ```toml
-    ignore-missing-dists = true
+    [pydist]
+    ignore-missing = true
     ```
 
-If this error surfaces from using the `qik.pygraph` plugin for module dependencies, other options for overriding behavior are in [this troubleshooting tip](#graph0).
+!!! tip
+
+    If receiving this error by using the [pygraph plugin](./plugin_pygraph.md), you can also ignore tracking distributions entirely with `pygraph.ignore-pydists = true`.
 
 ## Args
 

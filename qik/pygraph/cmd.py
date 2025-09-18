@@ -84,7 +84,7 @@ def lock_cmd(runnable: qik.runnable.Runnable) -> tuple[int, str]:
                 try:
                     yield from (pydist for pydist in distributions[module.imp] if pydist)
                 except KeyError as exc:
-                    raise qik.errors.DistributionNotFound(
+                    raise qik.errors.ModuleDistributionNotFound(
                         f'No distribution found for module "{module.imp}"'
                     ) from exc
 

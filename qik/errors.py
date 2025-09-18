@@ -128,8 +128,12 @@ class DotEnvNotFound(RunnableError):
     code = "space2"
 
 
-class DistributionNotFound(RunnableError):
+class ModuleDistributionNotFound(RunnableError):
     code = "pydist0"
+
+
+class DistributionNotFound(RunnableError):
+    code = "pydist1"
 
 
 def fmt_msg(exc: Exception, prefix: str = "") -> str:
