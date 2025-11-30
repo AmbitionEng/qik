@@ -1,10 +1,11 @@
 [build-system]
-requires = ["poetry_core>=1.9.0"]
+requires = ["poetry_core>=2.2.1"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.coverage.run]
 branch = true
 source = ["qik"]
+patch = ["subprocess"]
 
 [tool.coverage.report]
 exclude_lines = [
@@ -27,7 +28,7 @@ packages = [
 exclude = [
   "*/tests/"
 ]
-version = "0.2.6"
+version = "0.2.7"
 description = "Tame your monorepo. Make CI fast again."
 authors = ["Wes Kendall"]
 classifiers = [
@@ -38,6 +39,7 @@ classifiers = [
   "Programming Language :: Python :: 3.11",
   "Programming Language :: Python :: 3.12",
   "Programming Language :: Python :: 3.13",
+  "Programming Language :: Python :: 3.14",
   "Programming Language :: Python :: 3 :: Only",
 ]
 license = "BSD-3-Clause"
@@ -70,25 +72,25 @@ dev = ["watchdog", "grimp", "rustworkx", "uv"]
 s3 = ["boto3"]
 
 [tool.poetry.dev-dependencies]
-pytest = "8.3.3"
-pytest-cov = "5.0.0"
+pytest = "9.0.1"
+pytest-cov = "7.0.0"
 pytest-dotenv = "0.5.2"
 pytest-mock = "3.14.0"
 moto = {extras = ["s3", "server"], version = "5.0.12"}
 tox = "4.23.2"
-ruff = "0.7.1"
+ruff = "0.14.7"
 pymdown-extensions = "10.11.1"
-pyright = "1.1.386"
+pyright = "1.1.407"
 mkdocs = "1.6.1"
-black = "24.10.0"
-mkdocs-material = "9.5.42"
-mkdocstrings-python = "1.12.2"
+black = "25.11.0"
+mkdocs-material = "9.7.0"
+mkdocstrings-python = "2.0.0"
 footing = "*"
 setuptools = "*"
-poetry-core = "1.9.1"
+poetry-core = "2.2.1"
 cleo = "2.1.0"
-poetry-plugin-export = "1.8.0"
-typing-extensions = "4.12.2"
+poetry-plugin-export = "1.9.0"
+typing-extensions = "4.15.0"
 
 [tool.pytest.ini_options]
 xfail_strict = true

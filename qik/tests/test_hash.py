@@ -50,9 +50,9 @@ def test_globs(tmpdir, mocker):
 
 def test_pydists():
     venv = qik.venv.active()
-    assert qik.hash.pydists("pytest", venv=venv) == "7113a7e1bfec3488e5ebce346daa3b06"
+    assert qik.hash.pydists("pytest", venv=venv) == "07178c065927b00d5a2f349755548925"
     assert (
-        qik.hash.pydists("pytest", "pytest-cov", venv=venv) == "21e01cb189bd6bad834a346ba065da5f"
+        qik.hash.pydists("pytest", "pytest-cov", venv=venv) == "7f553629ffbb74d5a7a695faaf0043ad"
     )
 
 
