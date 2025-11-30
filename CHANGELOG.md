@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.2.7 (2025-11-30)
+
+#### Changes
+
+  - Drop Python 3.9 support, add Python 3.14 support by [@wesleykendall](https://github.com/wesleykendall) in [#20](https://github.com/AmbitionEng/qik/pull/20).
+
 ## 0.2.6 (2025-09-18)
 
 #### Fixes
