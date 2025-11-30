@@ -2,7 +2,7 @@
 
 ## Compatibility
 
-`qik` is compatible with Python 3.9 - 3.13.
+`qik` is compatible with Python 3.10 - 3.14.
 
 ## Documentation
 

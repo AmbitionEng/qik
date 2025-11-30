@@ -4,4 +4,4 @@ Welcome to the docs for `qik`! It doesn't appear that the author has created any
 
 ## Compatibility
 
-`qik` is compatible with Python 3.9 - 3.13.
+`qik` is compatible with Python 3.10 - 3.14.
