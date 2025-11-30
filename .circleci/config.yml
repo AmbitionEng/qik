@@ -1,0 +1,89 @@
+version: 2.1
+
+orbs:
+  ambitioneng:
+    executors:
+      python:
+        working_directory: /code
+        docker:
+          - image: opus10/circleci-python-library:2024-10-26
+            environment:
+              # Ensure makefile commands are not wrapped in "docker compose run"
+              EXEC_WRAPPER: ''
+    commands:
+      test:
+        steps:
+          - checkout
+          - restore_cache:
+              key: v5-{{ checksum "poetry.lock" }}
+          - run: make dependencies
+          - run: make full-test-suite
+          - save_cache:
+              key: v5-{{ checksum "poetry.lock" }}
+              paths:
+                - /home/circleci/.cache/pypoetry/
+                - /code/.venv
+                - /code/.tox
+
+jobs:
+  test:
+    executor:
+      name: ambitioneng/python
+    steps:
+      - ambitioneng/test
+
+  lint:
+    executor: ambitioneng/python
+    steps:
+      - checkout
+      - restore_cache:
+          key: v5-{{ checksum "poetry.lock" }}
+      - run: make dependencies
+      - run: make lint
+
+  type_check:
+    executor: ambitioneng/python
+    steps:
+      - checkout
+      - restore_cache:
+          key: v5-{{ checksum "poetry.lock" }}
+      - run: make dependencies
+      - run: make type-check || true
+
+  deploy:
+    executor: ambitioneng/python
+    steps:
+      - checkout
+      - run: ssh-add -D
+      - restore_cache:
+          key: v5-{{ checksum "poetry.lock" }}
+      - run: make dependencies
+      - run: poetry run python devops.py deploy
+
+workflows:
+  version: 2
+  on_commit:
+    jobs:
+      - test:
+          filters:
+            tags:
+              only: /.*/
+      - lint:
+          filters:
+            tags:
+              only: /.*/
+      - type_check:
+          filters:
+            tags:
+              only: /.*/
+      - deploy:
+          context: python-library
+          requires:
+            - test
+            - lint
+            - type_check
+          filters:
+            branches:
+              ignore: /.*/
+            tags:
+              only: /.*/
