@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.2.8 (2025-12-14)
+
+#### Fixes
+
+  - Fix issues related to finding the toplevel `git` directory when operating in a worktree by [@wesleykendall](https://github.com/wesleykendall) in [#21](https://github.com/AmbitionEng/qik/pull/21).
+
 ## 0.2.7 (2025-11-30)
 
 #### Changes
