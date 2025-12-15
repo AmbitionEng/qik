@@ -151,7 +151,7 @@ def _add_cache_dir_to_git_attributes():
     https://docs.github.com/en/repositories/working-with-files/managing-files/customizing-how-changed-files-appear-on-github
     """
     git_root_dir = pathlib.Path(
-        qik.shell.exec("git rev-parse --absolute-git-dir").stdout.strip()
+        qik.shell.exec("git rev-parse --show-toplevel").stdout.strip()
     ).parent
     attrs_path = git_root_dir / ".gitattributes"
     ignore_glob = qik.conf.root().relative_to(git_root_dir) / ".qik/**/*"
