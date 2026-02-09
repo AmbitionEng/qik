@@ -19,6 +19,19 @@ if TYPE_CHECKING:
     import qik.venv
 
 
+def _run_with_stdin(cmd: list[str], stdin_data: str) -> list[str]:
+    """Run a command with data piped via stdin, avoiding ARG_MAX limits."""
+    result = subprocess.run(
+        cmd,
+        input=stdin_data,
+        text=True,
+        capture_output=True,
+        check=True,
+        cwd=qik.conf.root(),
+    )
+    return [line for line in result.stdout.strip().split("\n") if line]
+
+
 def globs(*vals: run_deps.Glob | str) -> str:
     """Compute a hash string of glob patterns.
 
@@ -41,15 +54,15 @@ def globs(*vals: run_deps.Glob | str) -> str:
             check=True,
         ).stdout
 
-    repo_patterns = sorted(
-        f"'{glob}'" for glob in globs if not glob.startswith("._qik/artifacts/")
-    )
+    repo_patterns = sorted(glob for glob in globs if not glob.startswith("._qik/artifacts/"))
     repo_hash = ""
     if repo_patterns:
-        # Create a pattern string for git ls-files. Ensure there are no duplicates and
-        # that we sort globs for a consistent hash
-        pattern_str = " ".join(repo_patterns)
-        git_ls_lines = qik.shell.exec(f"git ls-files -cms {pattern_str}", check=True, lines=True)
+        # Pipe patterns via stdin to xargs to avoid ARG_MAX limits
+        patterns_input = "\n".join(repo_patterns)
+        git_ls_lines = _run_with_stdin(
+            ["xargs", "git", "ls-files", "-cms"],
+            patterns_input,
+        )
         git_ls_lines_split = [
             (path, sha)
             for _, sha, _, path in (re.split(r"\s+", line, maxsplit=3) for line in git_ls_lines)
@@ -60,26 +73,29 @@ def globs(*vals: run_deps.Glob | str) -> str:
         path_counts = collections.Counter(line[0] for line in git_ls_lines_split)
         modified = [path for path, count in path_counts.items() if count > 1]
         if modified:
+            modified_paths_str = "\n".join(modified)
             try:
-                modified_hashes_lines = qik.shell.exec(
-                    f"git ls-files {pattern_str} -m | xargs git hash-object",
-                    check=True,
-                    lines=True,
+                modified_hashes_lines = _run_with_stdin(
+                    ["xargs", "git", "hash-object"],
+                    modified_paths_str,
                 )
             except subprocess.CalledProcessError:
                 # If there are issues with the first command, it likely means a file does
-                # not exist. Do the suboptimal strategy here, piping individual files to
-                # `git hash-object` while printing zeroes for files that no longer exist.
-                cmd = f"""
-                    git ls-files {pattern_str} -m | while IFS= read -r file; do
-                        if [ -f "$file" ]; then
-                            git hash-object "$file"
-                        else
-                            echo "0000000000000000000000000000000000000000"
-                        fi
-                    done
-                """
-                modified_hashes_lines = qik.shell.exec(cmd, check=True, lines=True)
+                # not exist. Do the suboptimal strategy here, hashing individual files
+                # while printing zeroes for files that no longer exist.
+                modified_hashes_lines = []
+                for path in modified:
+                    try:
+                        result = subprocess.run(
+                            ["git", "hash-object", path],
+                            text=True,
+                            capture_output=True,
+                            check=True,
+                            cwd=qik.conf.root(),
+                        )
+                        modified_hashes_lines.append(result.stdout.strip())
+                    except subprocess.CalledProcessError:
+                        modified_hashes_lines.append("0000000000000000000000000000000000000000")
 
             for i, name in enumerate(modified):
                 # TODO: Occasionally we can get a list index out of range error here. It seems
@@ -90,7 +106,7 @@ def globs(*vals: run_deps.Glob | str) -> str:
                 except IndexError as e:
                     raise RuntimeError(f"Unexpected error when computing hash. {modified}") from e
 
-        repo_hash = "".join(f"{name}{hash}" for name, hash in hashes.items())
+        repo_hash = "".join(f"{name}{hash}" for name, hash in sorted(hashes.items()))
 
     return xxhash.xxh128_hexdigest(priv_artifact_hash + repo_hash)
 
