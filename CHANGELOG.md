@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.2.9 (2026-02-08)
+
+#### Fixes
+
+  - Fix exceeding maximum command line argument length on large amounts of globs by [@wesleykendall](https://github.com/wesleykendall) in [#22](https://github.com/AmbitionEng/qik/pull/22).
+
 ## 0.2.8 (2025-12-14)
 
 #### Fixes
