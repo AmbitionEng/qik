@@ -27,6 +27,7 @@ def _run_with_stdin(cmd: list[str], stdin_data: str) -> list[str]:
         text=True,
         capture_output=True,
         check=True,
+        cwd=qik.conf.root(),
     )
     return [line for line in result.stdout.strip().split("\n") if line]
 
@@ -90,6 +91,7 @@ def globs(*vals: run_deps.Glob | str) -> str:
                             text=True,
                             capture_output=True,
                             check=True,
+                            cwd=qik.conf.root(),
                         )
                         modified_hashes_lines.append(result.stdout.strip())
                     except subprocess.CalledProcessError:
