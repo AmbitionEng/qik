@@ -19,6 +19,13 @@ if TYPE_CHECKING:
     import qik.venv
 
 
+def _hexdigest(data: str | bytes) -> str:
+    """Hash with xxh128, encoding str first (xxhash >= 4.0 rejects str input)."""
+    if isinstance(data, str):
+        data = data.encode()
+    return xxhash.xxh128_hexdigest(data)
+
+
 def _run_with_stdin(cmd: list[str], stdin_data: str) -> list[str]:
     """Run a command with data piped via stdin, avoiding ARG_MAX limits."""
     result = subprocess.run(
@@ -108,18 +115,16 @@ def globs(*vals: run_deps.Glob | str) -> str:
 
         repo_hash = "".join(f"{name}{hash}" for name, hash in sorted(hashes.items()))
 
-    return xxhash.xxh128_hexdigest(priv_artifact_hash + repo_hash)
+    return _hexdigest(priv_artifact_hash + repo_hash)
 
 
 def pydists(*vals: str, venv: qik.venv.Venv) -> str:
-    return xxhash.xxh128_hexdigest(
-        "".join(f"{pydist}{venv.version(pydist)}" for pydist in sorted(vals))
-    )
+    return _hexdigest("".join(f"{pydist}{venv.version(pydist)}" for pydist in sorted(vals)))
 
 
 def strs(*vals: str) -> str:
-    return xxhash.xxh128_hexdigest("".join(sorted(vals)))
+    return _hexdigest("".join(sorted(vals)))
 
 
 def val(input: str | bytes) -> str:
-    return xxhash.xxh128_hexdigest(input)
+    return _hexdigest(input)
