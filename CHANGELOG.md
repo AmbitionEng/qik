@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.2.10 (2026-09-04)
+
+#### Fixes
+
+  - Fix `TypeError: Strings must be encoded before hashing` on xxhash 4 by [@somewes](https://github.com/somewes) in [#23](https://github.com/AmbitionEng/qik/pull/23).
+
 ## 0.2.9 (2026-02-08)
 
 #### Fixes
