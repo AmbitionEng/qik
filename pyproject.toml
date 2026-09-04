@@ -28,7 +28,7 @@ packages = [
 exclude = [
   "*/tests/"
 ]
-version = "0.2.9"
+version = "0.2.10"
 description = "Tame your monorepo. Make CI fast again."
 authors = ["Wes Kendall"]
 classifiers = [
