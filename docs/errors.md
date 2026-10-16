@@ -146,6 +146,18 @@ fence = ["path/to/module", {type = "space", name = "other"}]
 ...
 ```
 
+<a id="conf15"></a>
+
+#### Tag Not Found
+
+`Tag {name} not configured...` means no command in the root project configuration or in any `qik.toml` files of modules has the tag. Tags are configured on commands, for example:
+
+```toml
+[commands.lint]
+exec = "ruff check ."
+tags = ["lint"]
+```
+
 
 
 ## Context

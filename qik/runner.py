@@ -353,6 +353,20 @@ class Runner:
         qik.watcher.start(self)
 
 
+def _validate_tags(tags: list[str]) -> None:
+    """Ensure every tag is configured on at least one command."""
+    proj = qik.conf.project()
+    configured = {
+        tag
+        for module in [None, *proj.modules_by_name, *proj.plugins_by_name]
+        for cmd in qik.conf.search(module).commands
+        for tag in qik.conf.command(f"{module}/{cmd}" if module else cmd).tags
+    }
+    for tag in tags:
+        if tag not in configured:
+            raise qik.errors.TagNotFound(f'Tag "{tag}" not configured.')
+
+
 def _get_graph() -> Graph:
     """Get a filtered graph."""
     qik_ctx = qik.ctx.by_namespace("qik")
@@ -367,6 +381,7 @@ def _get_graph() -> Graph:
         raise qik.errors.GraphCycle("Cycle detected in DAG.") from exc
 
     if qik_ctx.tags:
+        _validate_tags(qik_ctx.tags)
         graph = graph.filter_tags(qik_ctx.tags)
 
     if qik_ctx.caches:

@@ -86,6 +86,10 @@ class CircularFence(RunnerError):
     code = "conf14"
 
 
+class TagNotFound(RunnerError):
+    code = "conf15"
+
+
 class CtxProfileNotFound(RunnerError):
     code = "ctx0"
 
