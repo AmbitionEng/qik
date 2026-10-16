@@ -122,6 +122,11 @@ def test_selectors():
         "modular_lint@other#nest/c",
     }
 
+    # Unconfigured tags should error
+    result = shell("qik --tag asdf --ls")
+    assert result.returncode == 1
+    assert 'Tag "asdf" not configured.' in result.stdout
+
     # Ensure repo cache is warm
     assert shell("qik --cache-status cold --cache repo --ls --fail").returncode == 0
 
